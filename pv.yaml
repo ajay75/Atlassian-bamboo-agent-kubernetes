@@ -15,4 +15,4 @@ spec:
     - noatime
   nfs:
     path: /zfs/application-data/bamboo-agent
-    server: node05
+    server: node06

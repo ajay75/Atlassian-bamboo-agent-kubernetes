@@ -26,7 +26,7 @@ spec:
           mountPath: "/home/bamboo/bamboo-agent-home"
       containers:
       - name: bamboo-agent
-        image: alonsomiguel/arm64v8-bamboo-server-agent:7.0.4
+        image: alonsomiguel/arm64v8-bamboo-server-agent:7.1.1
         imagePullPolicy: "Always"
         ports:
         volumeMounts:

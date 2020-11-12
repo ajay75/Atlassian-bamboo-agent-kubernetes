@@ -1,9 +1,9 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: bamboo-agent-pvc
+  name: bamboo-agent-arm-pvc
   labels:
-    app: bamboo-agent
+    app: bamboo-agent-arm
 spec:
   storageClassName: manual
   accessModes:

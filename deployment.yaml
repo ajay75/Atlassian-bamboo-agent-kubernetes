@@ -1,38 +1,38 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: bamboo-agent
+  name: bamboo-agent-arm
   labels:
-    app: bamboo-agent
+    app: bamboo-agent-arm
 spec:
   replicas: 1
   strategy:
     type: Recreate
   selector:
     matchLabels:
-      app: bamboo-agent
+      app: bamboo-agent-arm
   template:
     metadata:
       labels:
-        app: bamboo-agent
+        app: bamboo-agent-arm
     spec:
-      hostname: bamboo-agent
+      hostname: bamboo-agent-arm
       initContainers:
       - name: change-home-ownership
         image: busybox
         command: ["/bin/sh","-c","chown -R 1000:1000 /home/bamboo/bamboo-agent-home"]
         volumeMounts:
-        - name: bamboo-agent-pv
+        - name: bamboo-agent-arm-pv
           mountPath: "/home/bamboo/bamboo-agent-home"
       containers:
-      - name: bamboo-agent
+      - name: bamboo-agent-arm
         image: alonsomiguel/arm64v8-bamboo-server-agent:7.1.1
         imagePullPolicy: "Always"
         ports:
         volumeMounts:
-        - name: bamboo-agent-pv
+        - name: bamboo-agent-arm-pv
           mountPath: "/home/bamboo/bamboo-agent-home"
-        args: ["https://malonso.me/bamboo"]
+        args: ["https://build.malonso.me"]
         env:
         - name: DOCKER_HOST
           value: tcp://127.0.0.1:2375
@@ -48,8 +48,8 @@ spec:
       nodeSelector:
         k3s.io/hostname: "node03"
       volumes:
-      - name: bamboo-agent-pv
+      - name: bamboo-agent-arm-pv
         persistentVolumeClaim:
-          claimName: bamboo-agent-pvc
+          claimName: bamboo-agent-arm-pvc
       - name: dind-storage
         emptyDir: {}

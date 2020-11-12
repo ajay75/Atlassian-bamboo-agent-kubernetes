@@ -1,9 +1,9 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: bamboo-agent-pv
+  name: bamboo-agent-arm-pv
   labels:
-    app: bamboo-agent
+    app: bamboo-agent-arm
 spec:
   storageClassName: manual
   capacity:
@@ -14,5 +14,5 @@ spec:
     - lookupcache=pos
     - noatime
   nfs:
-    path: /zfs/encrypted/application-data/bamboo-agent
-    server: node06
+    path: /mnt/kingston/application-data/bamboo-agent-arm
+    server: node00
